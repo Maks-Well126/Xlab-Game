@@ -2,50 +2,52 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(NavMeshMouseResolver))]
-public class PlayerController : MonoBehaviour
+namespace Players
 {
-
-    [SerializeField] private PlayerConfig m_config;
-    [SerializeField] private PlayerMovement m_playerMovement;
-    [SerializeField] private NavMeshMouseResolver m_navMeshMouseResolver;
-
-
-    private void OnValidate()
+    [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(NavMeshMouseResolver))]
+    public class PlayerController : MonoBehaviour
     {
-        if(!m_playerMovement)
+
+        [SerializeField] private PlayerConfig m_config;
+        [SerializeField] private PlayerMovement m_playerMovement;
+        [SerializeField] private NavMeshMouseResolver m_navMeshMouseResolver;
+
+
+        private void OnValidate()
         {
-            m_playerMovement = GetComponent<PlayerMovement>();
-        }
-
-        if(!m_playerMovement)
-        {
-            m_navMeshMouseResolver = GetComponent<NavMeshMouseResolver>();
-        }
-    } 
-
-
-
-    private void Start()
-    {
-        m_playerMovement.Initialize(m_config.speed);
-        m_navMeshMouseResolver.Initialize(Camera.main);
-    }
-
-
-
-    private void Update()
-    {
-        if(Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Vector3 mousePosition = Mouse.current.position.ReadValue();
-            Vector3? navPoint = m_navMeshMouseResolver.GetNavMeshPoint(mousePosition);
-            
-            if(navPoint.HasValue)
+            if(!m_playerMovement)
             {
-                m_playerMovement.SetDestination(navPoint.Value);
+                m_playerMovement = GetComponent<PlayerMovement>();
+            }
+
+            if(!m_playerMovement)
+            {
+                m_navMeshMouseResolver = GetComponent<NavMeshMouseResolver>();
+            }
+        } 
+
+
+
+        private void Start()
+        {
+            m_playerMovement.Initialize(m_config.speed);
+            m_navMeshMouseResolver.Initialize(Camera.main);
+        }
+
+
+
+        private void Update()
+        {
+            if(Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                Vector3 mousePosition = Mouse.current.position.ReadValue();
+                Vector3? navPoint = m_navMeshMouseResolver.GetNavMeshPoint(mousePosition);
+                
+                if(navPoint.HasValue)
+                {
+                    m_playerMovement.SetDestination(navPoint.Value);
+                }
             }
         }
     }

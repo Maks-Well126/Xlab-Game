@@ -1,84 +1,60 @@
-using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
-public class TargetMarker : MonoBehaviour
+namespace Markers
 {
-        [Header("View")]
-        [SerializeField] private Sprite m_sprite;
-        [SerializeField] private Color m_color = Color.white;
+    public sealed class TargetMarker : MonoBehaviour
+    {
+        [Header("Parameters")]
+        // Начальный размер маркера.
+        [SerializeField] [Min(0)] private float m_startSize = 0.25f;
+        // Конечный размер маркера.
+        [SerializeField] [Min(0)] private float m_finishSize = 0.5f;
+        // Время перехода из startSize в FinishSise.
+        [SerializeField] [Min(0.0001f)] private float m_duration = 0.5f;
         
-        [Space]
-        [SerializeField] [Min(0)] private float m_size = 1f;
-        [SerializeField] private float m_yOffset = 0.02f;
+        // Функция анимации. Подобрать функцию можно на этом сайте:
+        // https://easings.net/
+        [SerializeField] private Ease m_ease = Ease.InOutSine;
 
-        [Header("Behaviour")]
-        [SerializeField] [Min(0)] private float m_lifetime = 1.25f;
-        
-        [Space]
-        [SerializeField] private bool m_isPulse = true;
-       
-        [Tooltip("Pulsation amplitude")]
-        [SerializeField] [Range(0, 1f)] private float m_pulseOffset = 0.15f;
-        [SerializeField] [Min(0.01f)] private float m_pulseSpeed = 6f;
-        
-        private float m_initialSize;
-        private SpriteRenderer m_spriteRenderer;
-        private Coroutine m_showingCoroutine;
-        
+        // Поле куда будем кэшировать анимацию.
+        private Tweener _tween;
+
+        // Метод показа маркера
         public void Show(Vector3 worldPosition)
         {
-            SetupView();
+            // Завершаем анимацию, если она есть.
+            _tween?.Kill();
             
+            // Активируем маркер.
             gameObject.SetActive(true);
-            m_spriteRenderer.enabled = true;
-            transform.position = new Vector3(worldPosition.x, worldPosition.y + m_yOffset, worldPosition.z);
             
-            if (m_showingCoroutine is not null)
-                StopCoroutine(m_showingCoroutine);
+            // Устанавливаем маркер на нужную позицию.
+            transform.position = worldPosition;
             
-            m_showingCoroutine = StartCoroutine(Showing());
-        }
+            // Устанавливаем начальный размер маркера.
+            transform.localScale = Vector3.one * m_startSize;
 
-        private void SetupView()
-        {
-            if (!m_spriteRenderer)
-            {
-                var spriteObject = new GameObject(name: "MarkerSprite");
-                
-                spriteObject.transform.SetParent(transform, false);
-                spriteObject.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
-                
-                m_spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
-                m_spriteRenderer.sortingOrder = 1000;
-                m_spriteRenderer.enabled = false;
-                
-                m_spriteRenderer.sprite = m_sprite;
-                m_spriteRenderer.color = m_color;
-                
-                m_initialSize = Mathf.Max(0.01f, m_size);
-                transform.localScale = Vector3.one * m_initialSize;
-            }
+            // Запускаем анимацию и кэшируем ее.
+            // DOScale принимает в себя конечный резултат и длительность анимации.
+            // SetEase устанавливает анимационную функцию.
+            // SetLoops. -1 говорит о том что анимация бесконечныя,
+            // а LoopType.Yoyo о том что анимацию в DOSюcale надо проиграть в обратную сторону.
+            _tween = transform
+                .DOScale(Vector3.one * m_finishSize, m_duration)
+                .SetEase(m_ease)
+                .SetLoops(-1, LoopType.Yoyo);
         }
         
-        private IEnumerator Showing()
-        {
-            float time = 0f;
+        // Метод скрытия маркера.
+        public void Hide()
+        {    
+            // Завершаем анимацию, если она есть.
+            _tween?.Kill();
+            _tween = null;
             
-            while (time < m_lifetime)
-            {
-                time += Time.deltaTime;
-                
-                if (m_isPulse)
-                {
-                    var coefficient = 1f + Mathf.Sin(Time.time * m_pulseSpeed) * m_pulseOffset;
-                    var scale = m_initialSize * coefficient;
-                    transform.localScale = Vector3.one * scale;
-                }
-                
-                yield return null;
-            }
-
-            m_spriteRenderer.enabled = false;
-            transform.localScale = Vector3.one * m_initialSize;
+            // Деактивируем маркер.
+            gameObject.SetActive(false);
         }
     }
+}
