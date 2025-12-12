@@ -15,6 +15,7 @@ namespace Players
         [SerializeField] private NavMeshAgent m_agent;
 
         private float m_speed;
+        private float m_angularSpeed;
         private bool m_hasDestination;
         
         private void OnValidate()
@@ -26,7 +27,7 @@ namespace Players
         }
 
         private void Awake() =>
-            Initialize(m_speed);
+            Initialize(m_speed, m_angularSpeed);
         
         private void Update()
         {
@@ -48,7 +49,7 @@ namespace Players
             }
         }
 
-        public void Initialize(float speed)
+        public void Initialize(float speed, float angularSpeed)
         {
             m_speed = speed;
             m_agent.speed = speed;
@@ -61,6 +62,20 @@ namespace Players
             
             // Вызываем событие о том, что точка доститжения изменилась.
             DestinationChanged?.Invoke(navMeshPoint);
+        }
+
+        public void RotateTowarrds(Vector3 worldPoint)
+        {
+            var direction = worldPoint - transform.position;
+            direction.y = 0;
+
+            if(direction.sqrMagnitude < 0.0001f)
+            {
+                return;
+            }
+            var targetRotate = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotate, m_agent.angularSpeed * Time.deltaTime);
+
         }
     }
 }
