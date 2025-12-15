@@ -52,7 +52,13 @@ namespace Players
         public void Initialize(float speed, float angularSpeed)
         {
             m_speed = speed;
+            m_angularSpeed = angularSpeed;
+
+
             m_agent.speed = speed;
+            m_agent.angularSpeed = angularSpeed;
+
+            m_agent.updateRotation = false;
         }
         
         public void SetDestination(Vector3 navMeshPoint)
