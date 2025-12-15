@@ -11,7 +11,7 @@ public class BaseSpellData : ScriptableObject
     [SerializeField] private ElementType[] m_combination;
 
     //[SerializeReferenceDropdown]
-    //[SerializeReference] 
+    [SerializeReference] private IEffect[] m_effects;
 
     public string spellName => m_spellName;
 
