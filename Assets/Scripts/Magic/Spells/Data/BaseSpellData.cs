@@ -10,7 +10,7 @@ public class BaseSpellData : ScriptableObject
     [SerializeField] private GameObject m_visualEffect;
     [SerializeField] private ElementType[] m_combination;
 
-    //[SerializeReferenceDropdown]
+    [SerializeReferenceDropdown]
     [SerializeReference] private IEffect[] m_effects;
 
     public string spellName => m_spellName;
