@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
+
 namespace Players
 {
     [RequireComponent(typeof(PlayerMovement))]
-    [RequireComponent(typeof(NavMeshMouseResolver))]
     public class PlayerController : MonoBehaviour
     {
 
         [SerializeField] private PlayerConfig m_config;
         [SerializeField] private PlayerMovement m_playerMovement;
-        [SerializeField] private NavMeshMouseResolver m_navMeshMouseResolver;
+        [SerializeField] private MouseResolver m_navMeshMouseResolver;
+        [SerializeField] private MagicInputHelper m_magicInputHelper;
 
         private PlayerRotatinCalculator m_playerRotatinCalculator;
 
@@ -25,7 +26,7 @@ namespace Players
 
             if(!m_playerMovement)
             {
-                m_navMeshMouseResolver = GetComponent<NavMeshMouseResolver>();
+                m_navMeshMouseResolver = GetComponent<MouseResolver>();
             }
         } 
 
@@ -36,7 +37,6 @@ namespace Players
             var camera = Camera.main;
 
             m_playerMovement.Initialize(m_config.speed, m_config.angularSpeed);
-            m_navMeshMouseResolver.Initialize(Camera.main);
             m_playerRotatinCalculator = new PlayerRotatinCalculator(camera, transform);
 
             SetupCursor();
@@ -55,13 +55,15 @@ namespace Players
             if(Mouse.current.rightButton.wasPressedThisFrame)
             {
 
-                Vector3? navPoint = m_navMeshMouseResolver.GetNavMeshPoint(mousePosition);
+                Vector3? navPoint = m_navMeshMouseResolver.GetNavMeshPoint();
                 
                 if(navPoint.HasValue)
                 {
                     m_playerMovement.SetDestination(navPoint.Value);
                 }
             }
+
+            m_magicInputHelper.Update();
         }
 
         private void SetupCursor()

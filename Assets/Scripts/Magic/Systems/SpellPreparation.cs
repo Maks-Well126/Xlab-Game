@@ -35,7 +35,7 @@ public class SpellPreparation
         
     }
 
-    public bool TrygetSpell(out BaseSpellData spell)
+    public bool TryGetSpell(out BaseSpellData spell)
     {
         spell = null;
 
@@ -74,7 +74,8 @@ public class SpellPreparation
     }
     public void Clear()
     {
-
+        m_elements.Clear();
+        ElementsChanged?.Invoke(m_elements);
     }
 
 }
