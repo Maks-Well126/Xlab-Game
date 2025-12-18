@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: FireballSpell
   m_EditorClassIdentifier: Assembly-CSharp::TargetSpellData
   m_spellName: Fireball
-  m_visualEffect: {fileID: 0}
+  m_visualEffect: {fileID: 1470432211585010, guid: 46e42cb4df2b93d49a886319b9856655, type: 3}
   m_combination: 00000000
   m_effects:
-  - rid: 9104819812723851327
+  - rid: 9104819812723851329
   m_speed: 25
   references:
     version: 2
     RefIds:
-    - rid: 9104819812723851327
+    - rid: 9104819812723851329
       type: {class: AttackEffect, ns: , asm: Assembly-CSharp}
       data:
         m_damage: 25

@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class SpellCaster
+
+
+public sealed class SpellCaster
 {
-    private Transform m_casterTransform;
+    private readonly Transform m_casterTransform;
 
     public SpellCaster(Transform casterTransform)
     {
@@ -29,12 +33,51 @@ public class SpellCaster
         }
     }
 
-    private void CastSelf(SelfSpellData spell) { }
-    private void CastTarget(TargetSpellData spell, Vector3 worldPosition)
+    private void CastSelf(SelfSpellData selfSpell)
     {
-        Debug.Log("123");
+        if(selfSpell.visualEffect)
+        {
+            Object.Instantiate(selfSpell.visualEffect, m_casterTransform.position, Quaternion.identity);
+        }
+
+        if(m_casterTransform.TryGetComponent<IEffectable>(out var effectable))
+        {
+            foreach(var effect in selfSpell.effects)
+            {
+                effect.Apply(effectable);
+            }
+    
+        }
+    }
+    private void CastTarget(TargetSpellData targetSpell, Vector3 worldPosition)
+    {
+        if(!targetSpell.visualEffect)
+        {
+            throw new NullReferenceException("Target spell must have visualEffect");
+        }
+
+        var projectile = Object.Instantiate(targetSpell.visualEffect, m_casterTransform.position, Quaternion.identity);
+        
+        var SpellProjectile =
+        projectile.GetComponent<ISpellProjectile>() ??
+        projectile.AddComponent<SpellProjectile>();
+
+        SpellProjectile.Initialize(worldPosition, targetSpell.speed, targetSpell.effects);
     }
     private void CastNonTarget(NonTargetSpellData spell) { }
-    private void CastAOE(AoeSpellData spell, Vector3 worldPosition) { }
+    private void CastAOE(AoeSpellData aoeSpell, Vector3 worldPosition)
+    {
+        var aoe = aoeSpell.visualEffect
+        ? Object.Instantiate(aoeSpell.visualEffect, m_casterTransform.position, Quaternion.identity)
+        : new GameObject();
+
+        aoe.transform.position = worldPosition;
+
+        var SpellAoe =
+            aoe.GetComponent<ISpellAoe>() ??
+            aoe.AddComponent<SpellAoe>();
+
+            SpellAoe.Initialize(worldPosition, aoeSpell.radius, aoeSpell.effects);
+    }
 
 }

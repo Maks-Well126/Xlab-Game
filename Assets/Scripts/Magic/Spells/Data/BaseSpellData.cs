@@ -18,6 +18,7 @@ public abstract class BaseSpellData : ScriptableObject
     public GameObject visualEffect => m_visualEffect;
 
     public IReadOnlyList<ElementType> combination => m_combination;
+    public IReadOnlyList<IEffect> effects => m_effects;
 
     private void OnValidate()
     {
