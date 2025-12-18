@@ -19,7 +19,7 @@ public class SpellPreparation
 
     public void AddElement(ElementType elementType)
     {
-        if (m_elements.Count >= m_magicConfig.MaxElements)
+        if (m_elements.Count >= m_magicConfig.maxElements)
         {
 
             Clear();

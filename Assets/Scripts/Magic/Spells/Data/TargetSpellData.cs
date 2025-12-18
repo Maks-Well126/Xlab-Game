@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TargetSpellData", menuName = "Scriptable Objects/TargetSpellData")]
+[CreateAssetMenu(fileName = "TargetSpellData", menuName = "Xlab/Magic/Spells/Target Spell")]
 public class TargetSpellData : BaseSpellData
 {
 

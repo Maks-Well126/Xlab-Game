@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BaseSpellData", menuName = "Scriptable Objects/BaseSpellData")]
-public class BaseSpellData : ScriptableObject
+public abstract class BaseSpellData : ScriptableObject
 {
 
     [SerializeField] private string m_spellName;
@@ -24,7 +24,7 @@ public class BaseSpellData : ScriptableObject
         if(m_combination?.Length > 3)
         {
             m_combination = m_combination.Take(3).ToArray();
-            }
+        }
     }
 
 

@@ -7,9 +7,7 @@ namespace Players
     [RequireComponent(typeof(NavMeshAgent))]
     public class PlayerMovement : MonoBehaviour
     {
-        // Событие остановки игрока.
         public event Action Stopped;
-        // Событие об изменение точки достижения.
         public event Action<Vector3> DestinationChanged;
         
         [SerializeField] private NavMeshAgent m_agent;
@@ -40,10 +38,8 @@ namespace Players
             {
                 if (!m_agent.hasPath || m_agent.velocity.sqrMagnitude <= 0.001f)
                 {
-                    // Оставнавливаем агента.
                     m_agent.isStopped = false;
                     
-                    // Вызываем событие об остановки.
                     Stopped?.Invoke();
                 }
             }
@@ -66,7 +62,6 @@ namespace Players
             m_agent.SetDestination(navMeshPoint);
             m_hasDestination = true;
             
-            // Вызываем событие о том, что точка доститжения изменилась.
             DestinationChanged?.Invoke(navMeshPoint);
         }
 

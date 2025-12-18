@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SelfSpellData", menuName = "Scriptable Objects/SelfSpellData")]
+[CreateAssetMenu(fileName = "SelfSpellData", menuName = "Xlab/Magic/Spells/Self Spell")]
 public class SelfSpellData : BaseSpellData
 {
     [SerializeField] private bool m_isTarget;

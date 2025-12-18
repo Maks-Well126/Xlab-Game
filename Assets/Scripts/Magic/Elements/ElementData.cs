@@ -1,14 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ElementData", menuName = "Scriptable Objects/ElementData", order = 0)]
+[CreateAssetMenu(fileName = "ElementData", menuName = "Xlab/Magic/ElementData", order = 0)]
 public sealed class ElementData : ScriptableObject
 {
     [SerializeField] private Item[] m_items;
 
     public IReadOnlyList<Item> Items => m_items;
 
-    [SerializeField]
+    [Serializable]
     public sealed class Item
     {
         [SerializeField] private string m_elementName;
