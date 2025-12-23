@@ -1,0 +1,24 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Enemydata", menuName = "Xlab/Enemies/Enemy")]
+public class EnemyData : ScriptableObject
+{
+    [SerializeField] private AttackEnemyType m_enemyType;
+    [Header("Parametrs")]
+    [SerializeField][Min(0)] private float m_helth;
+    [SerializeField][Range(0f, 100f)] private float m_speed;
+
+    [Header("Attack")]
+    [SerializeField][Min(0)] private float m_attackTime;
+    [SerializeField][Min(0)] private float m_attackRange;
+
+    public float health => m_helth;
+    public float speed => m_speed;
+    public float attackTime => m_attackTime;
+    public float attackRange => m_attackRange;
+
+    public AttackEnemyType enemyType => m_enemyType;
+
+
+
+}
