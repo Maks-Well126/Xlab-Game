@@ -10,7 +10,7 @@ public class HelthComponent : MonoBehaviour, IHealth, IEffectable
     private float m_value;
     private bool m_initiaize;
 
-    public float Value
+    public float value
     {
         get => m_value;
         private set
@@ -47,7 +47,7 @@ public class HelthComponent : MonoBehaviour, IHealth, IEffectable
             throw new ArgumentOutOfRangeException(nameof(heal), heal, "heal cannot be negative");
         }
 
-        Value += heal;
+        value += heal;
     }
     public void TakeDamage(float damage)
     {
@@ -56,7 +56,7 @@ public class HelthComponent : MonoBehaviour, IHealth, IEffectable
             throw new ArgumentOutOfRangeException(nameof(damage), damage, "heal cannot be negative");
         }
 
-        Value -= damage;
+        value -= damage;
 
     }
 

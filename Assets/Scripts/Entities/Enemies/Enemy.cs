@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public event Action<Enemy> Died;
+
     [SerializeField] private EnemyData m_enemyData;
     [SerializeField] private HelthComponent m_health;
 
     private EnemyData m_data;
+
+    public HelthComponent health => m_health;
 
     private void Awake()
     {
@@ -17,18 +21,18 @@ public class Enemy : MonoBehaviour
     {
         m_health.ValueChanged += () =>
         {
-            Debug.Log($"health Cganged: {m_health.Value}");
+            Debug.Log($"health Cganged: {m_health.value}");
         };
 
         m_health.Died += OnDied;
     }
 
-    
+
 
     private void OnDisable()
     {
         m_health.Died -= OnDied;
-        
+
     }
 
 
@@ -38,9 +42,8 @@ public class Enemy : MonoBehaviour
         m_health.Initialize(data.health);
     }
 
-    private void OnDied()
-    {
-        Debug.Log("Enemy Died");
-        Destroy(gameObject);
-    }
+    private void OnDied() =>
+        Died?.Invoke(this);
+
 }
+
