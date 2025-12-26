@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1414718951524544879}
   - component: {fileID: 3775434527956970495}
   - component: {fileID: 6271829775383355853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 9137671731403376995}
   - component: {fileID: 1608090844349047317}
   - component: {fileID: 6158284725875303112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 7422756410920261455}
   - component: {fileID: 734002079108660295}
   - component: {fileID: 8445637707954180857}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 8725502136849663632}
   - component: {fileID: 4640097666917059350}
   - component: {fileID: 2832195250735716972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 7138767511357698376}
   - component: {fileID: 6941563451496585891}
   - component: {fileID: 886384215935772687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309716452196174062}
   - component: {fileID: 8450543865106846524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PreparationView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3545512277424673294}
   - component: {fileID: 7744667711845258618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PreparationView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 7459232819341514153}
   - component: {fileID: 1191801365806699770}
   - component: {fileID: 6402186157899792588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,6 +795,14 @@ PrefabInstance:
     - target: {fileID: 724846769292688190, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
       propertyPath: m_Name
       value: PrepearationElement (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 724846769292688190, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600101583274723745, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7756911027754810951, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
       propertyPath: m_Pivot.x
@@ -898,6 +906,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrepearationElement (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 724846769292688190, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600101583274723745, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7756911027754810951, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -999,6 +1015,14 @@ PrefabInstance:
     - target: {fileID: 724846769292688190, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
       propertyPath: m_Name
       value: PrepearationElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 724846769292688190, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600101583274723745, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7756911027754810951, guid: a15c4bf531fdd26478f75056193d316b, type: 3}
       propertyPath: m_Pivot.x

@@ -11,19 +11,10 @@ public class Enemy : MonoBehaviour
     private EnemyData m_data;
 
     public HelthComponent health => m_health;
-
-    private void Awake()
-    {
-        Initialize(m_enemyData);
-    }
+    
 
     private void OnEnable()
     {
-        m_health.ValueChanged += () =>
-        {
-            Debug.Log($"health Cganged: {m_health.value}");
-        };
-
         m_health.Died += OnDied;
     }
 
@@ -34,12 +25,40 @@ public class Enemy : MonoBehaviour
         m_health.Died -= OnDied;
 
     }
+    private void Update()
+    {
+        if (m_stateMashine.currentState is EnemyState.Dead || !m_data)
+        {
+            return;
+        }
+        UpdateState();
+    }
 
 
     public void Initialize(EnemyData data)
     {
         m_data = data;
         m_health.Initialize(data.health);
+        m_attack.Initialize(data.spell, data.attackTime, playerTransform);
+
+        m_stateMashine ?? = new EnemyStateMachine();
+    }
+
+    private void UpdateState()
+    {
+        var isInAttckRange = IsInRange();
+        switch(m_stateMachine.currentState)
+        {
+            case EnemyState.Idle: HendleIdleState(isInAttckRange); break;
+           // case EnemyState.Move: HendleIdleState(isInAttckRange); break;
+            case EnemyState.Attack: HendleIdleState(isInAttckRange); break;
+
+        }
+    }
+
+    private void HendleIdleState(object isInAttckRange)
+    {
+        throw new NotImplementedException();
     }
 
     private void OnDied() =>

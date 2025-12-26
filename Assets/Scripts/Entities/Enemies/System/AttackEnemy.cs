@@ -1,0 +1,58 @@
+using UnityEngine;
+
+public sealed class AttackEnemy : MonoBehaviour
+{
+    private Transform m_target;
+    private BaseSpellData m_spell;
+    private SpellCaster m_spellCaster;
+
+    private float m_attackTime;
+    private float m_cooldownTimer;
+    private bool m_initialize;
+
+
+
+    private void Initialize(BaseSpellData spell, float attackTime, Transform target)
+    {       
+        if(m_initialize)
+        {
+            return;
+        }
+
+        m_spell = spell;
+        m_target = target;
+        m_attackTime = attackTime;
+        m_spellCaster = new SpellCaster(transform);
+    }
+
+    private void Update()
+    {
+        if(!m_initialize)
+        { 
+            return;
+        
+        }
+        
+        if(m_cooldownTimer >0)
+        {
+            m_cooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    public bool TryAttack()
+    {
+        if (!m_initialize || !m_target)
+        {
+            return false;
+        }
+
+
+        if(m_cooldownTimer > 0)
+        {
+            return false;
+        }
+
+        m_spellCaster.Cast(m_spell, m_target.position);
+        return true;
+    }
+}
