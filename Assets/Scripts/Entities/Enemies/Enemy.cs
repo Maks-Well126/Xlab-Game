@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private AttackEnemy m_attack;
     [SerializeField] private HealthComponent m_health;
+    [SerializeField] private EnemyMovement m_movement;
 
     private EnemyData m_data;
     private Transform m_playerTransform;
@@ -47,10 +48,16 @@ public class Enemy : MonoBehaviour
     {
         m_data = data;
         m_health.Initialize(data.health);
+        m_movement.Initialized(data.speed, playerTransform); 
         m_attack.Initialize(data.spell, data.attackTime, playerTransform);
 
         m_playerTransform = playerTransform;
         m_stateMachine ??= new EnemyStateMachine();
+
+        if(data.enemyType == AttackEnemyType.Melee)
+        {
+            m_stateMachine.ChangeState(EnemyState.Move);
+        }
     }
 
     private void UpdateState()
@@ -60,8 +67,16 @@ public class Enemy : MonoBehaviour
         switch (m_stateMachine.currentState)
         {
             case EnemyState.Idle: HandleIdleState(isInAttackRange); break;
-            // case EnemyState.Move: HandleMoveState(isInAttackRange); break;
+            case EnemyState.Move: HandleMoveState(isInAttackRange); break;
             case EnemyState.Attack: HandleAttackState(isInAttackRange); break;
+        }
+    }
+
+    private void HandleMoveState(bool isInAttackRange)
+    {
+        if (isInAttackRange)
+        {
+            m_stateMachine.ChangeState(EnemyState.Attack);
         }
     }
 
@@ -107,7 +122,16 @@ public class Enemy : MonoBehaviour
 
     private void OnStateChanged(EnemyState previousState, EnemyState nextState)
     {
-        // TODO Add Movement
+        if(previousState is EnemyState.Move)
+        {
+            m_movement.StopMoving();
+
+        }
+
+        if(nextState is EnemyState.Move)
+        {
+            m_movement.StartMoving();
+        }
     }
 }
 

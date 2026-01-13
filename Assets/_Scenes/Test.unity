@@ -211,8 +211,8 @@ Transform:
   - {fileID: 71738767}
   - {fileID: 702622151}
   - {fileID: 1117512038}
-  - {fileID: 903185457}
   - {fileID: 894608055}
+  - {fileID: 903185457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &388958426 stripped
@@ -969,7 +969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903185456}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -997,6 +997,7 @@ MonoBehaviour:
   - {fileID: 606615045742074273, guid: 019b62c2adbf7764280675c992ca2fe2, type: 3}
   m_data:
   - {fileID: 11400000, guid: 737181f977340734fa32f8bb38afad8c, type: 2}
+  - {fileID: 11400000, guid: ef1aba2a08da29d44932b114e583f385, type: 2}
   m_spawnPoints:
   - {fileID: 1233084891}
   - {fileID: 1887854177}

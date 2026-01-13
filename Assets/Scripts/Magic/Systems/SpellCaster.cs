@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
 
@@ -7,10 +8,16 @@ using Object = UnityEngine.Object;
 public sealed class SpellCaster
 {
     private readonly Transform m_casterTransform;
+    private readonly bool m_isSingleSpell;
+    private ObjectPool<GameObject> m_visualEffectPool;
 
-    public SpellCaster(Transform casterTransform)
+    public SpellCaster(Transform casterTransform, bool isSingleSpell = false)
+
     {
+        m_isSingleSpell = isSingleSpell;
         m_casterTransform = casterTransform;
+        
+       
     }
 
     public void Cast(BaseSpellData spell, Vector3 worldPosition)
@@ -48,13 +55,8 @@ public sealed class SpellCaster
             SetLayer(visualEffect);
         }
 
-        if (m_casterTransform.TryGetComponent<IEffectable>(out var effectable))
-        {
-            foreach (var effect in selfSpell.effects)
-            {
-                effect.Apply(effectable);
-            }
-        }
+        var effectables = m_casterTransform.GetComponent<IEffectable>();
+       // selfSpell.effects.ApplyEffects(effectables);
     }
 
     private void CastTarget(TargetSpellData targetSpell, Vector3 worldPosition)
@@ -76,11 +78,16 @@ public sealed class SpellCaster
 
     private void CastNonTarget(NonTargetSpellData nonTargetSpell)
     {
-        // Разберем на уроке. 
+        
     }
 
     private void CastAoe(AoeSpellData aoeSpell, Vector3 worldPosition)
     {
+        if (!m_isSingleSpell)
+        {
+            m_visualEffectPool ??= new ObjectPool<GameObject>(createFunc: () => new GameObject("Visual"));
+        }
+
         var aoe = aoeSpell.visualEffect
             ? Object.Instantiate(aoeSpell.visualEffect, m_casterTransform.position, Quaternion.identity)
             : new GameObject();

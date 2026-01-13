@@ -9,12 +9,10 @@ public sealed class SpellAoe : MonoBehaviour, ISpellAoe
 
         foreach(var collider in colliders )
         {
+            var effectables = collider.GetComponents<IEffectable>();
             if(collider.TryGetComponent<IEffectable>(out var effectable))
             {
-                foreach(var effect in effects)
-                {
-                    effect.Apply(effectable);
-                }
+ //               effects.ApplyEffects(effectable);
             }
         }
     }
