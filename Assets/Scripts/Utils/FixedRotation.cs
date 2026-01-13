@@ -3,7 +3,7 @@ using UnityEngine;
 public class FixedRotation : MonoBehaviour
 {
     private Transform m_parent;
-    private Vector3 m_worldoffset;
+    private Vector3 m_worldOffset;
     private Quaternion m_rotation;
 
     void Start()
@@ -11,7 +11,7 @@ public class FixedRotation : MonoBehaviour
         m_parent = transform.parent;
 
         m_rotation = transform.rotation;
-        m_worldoffset =transform.position - m_parent.position;
+        m_worldOffset = transform.position - m_parent.position;
     }
 
 
@@ -23,7 +23,7 @@ public class FixedRotation : MonoBehaviour
             return;
         }
 
-        transform.position = m_parent.position + m_worldoffset;
+        transform.position = m_parent.position + m_worldOffset;
         transform.rotation = m_rotation;
     }
 }

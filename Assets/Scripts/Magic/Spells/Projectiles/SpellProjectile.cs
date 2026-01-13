@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Players;
 
 [RequireComponent(typeof(Rigidbody))]
-public class SpellProjectile : MonoBehaviour, ISpellProjectile
+public sealed class SpellProjectile : MonoBehaviour, ISpellProjectile
 {
-    
     [SerializeField] private Rigidbody m_rigidbody;
-
 
     private float m_speed;
     private bool m_initialized;
@@ -16,12 +15,12 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
     private float m_traveledDistance;
     private IReadOnlyList<IEffect> m_effects;
 
-    private void Oalidate()
+    private void OnValidate()
     {
-        if(!m_rigidbody)
+        if (!m_rigidbody)
         {
             m_rigidbody = GetComponent<Rigidbody>();
-        }        
+        }
     }
 
     private void Awake()
@@ -32,10 +31,11 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
 
     private void FixedUpdate()
     {
-        if(!m_initialized) return;
+        if (!m_initialized) return;
+
         m_traveledDistance += m_speed * Time.fixedDeltaTime;
 
-        if(m_traveledDistance >= m_targetDistance)
+        if (m_traveledDistance >= m_targetDistance)
         {
             Destroy(gameObject);
         }
@@ -45,14 +45,15 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
         }
     }
 
-    private void OiggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(!m_initialized) return;    
+        if (!m_initialized) return;
+       
 
-        if(other.TryGetComponent<IEffectable>(out var effectable))
+        if (other.TryGetComponent<IEffectable>(out var effectable))
             ApplyEffects(effectable);
 
-            Destroy(gameObject);   
+        Destroy(gameObject);
     }
 
     public void Initialize(Vector3 targetPosition, float speed, IReadOnlyList<IEffect> effects)
@@ -67,8 +68,8 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
 
         m_traveledDistance = 0f;
         m_targetDistance = Vector3.Distance(transform.position, m_targetPosition);
-        
-        if(m_direction != Vector3.zero)
+
+        if (m_direction != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(m_direction);
 
         m_initialized = true;
@@ -78,9 +79,9 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
 
     private void ApplyEffects(IEffectable target)
     {
-        if(m_effects is null) return;
+        if (m_effects is null) return;
 
-        foreach(var effect in m_effects)
+        foreach (var effect in m_effects)
         {
             effect?.Apply(target);
         }
@@ -88,6 +89,4 @@ public class SpellProjectile : MonoBehaviour, ISpellProjectile
 
     private void SetLinearVelocity() =>
         m_rigidbody.linearVelocity = m_direction * m_speed;
-
-
 }

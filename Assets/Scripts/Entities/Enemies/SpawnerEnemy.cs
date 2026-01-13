@@ -1,9 +1,10 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnerEnemy : MonoBehaviour
 {
+    [SerializeField] private Enemy[] m_enemies;
     [SerializeField] private EnemyData[] m_data;
-    [SerializeField] private Enemy[] m_enemy;
     [SerializeField] private Transform[] m_spawnPoints;
     [SerializeField] private Transform m_playerTransform;
 
@@ -14,19 +15,16 @@ public class SpawnerEnemy : MonoBehaviour
 
     public void Spawn()
     {
-        foreach(var spawnPoint in m_spawnPoints)
+        foreach (var spawnPoint in m_spawnPoints)
         {
-
             var enemy = GetEnemy();
             var enemyData = GetEnemyData();
 
             var enemyInstance = Instantiate(enemy, spawnPoint);
-            enemyInstance.Initialize(enemyData);
+            enemyInstance.Initialize(enemyData, m_playerTransform);
 
-            //enemyInstance.health.Died += OnDied;
+            enemyInstance.Died += OnDied;
         }
-
-
     }
 
     private void OnDied(Enemy enemy)
@@ -36,7 +34,7 @@ public class SpawnerEnemy : MonoBehaviour
     }
 
     private Enemy GetEnemy() =>
-        m_enemy[Random.Range(0, m_enemy.Length)];
+        m_enemies[Random.Range(0, m_enemies.Length)];
 
     private EnemyData GetEnemyData() =>
         m_data[Random.Range(0, m_data.Length)];

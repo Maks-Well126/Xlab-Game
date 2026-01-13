@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class EnemyStateMachine
 {
-    public event Action<EnemyState, EnemyData> StateChanged;
-    public EnemeState currenState {  get; private set; }
+    public event Action<EnemyState, EnemyState> StateChanged;
+
+    public EnemyState currentState { get; private set; }
 
     public EnemyStateMachine()
     {
-        currenState = EnemeState.Idle;
+        currentState = EnemyState.Idle;
     }
 
     public void ChangeState(EnemyState nextState)
     {
-        if (currenState is EnemyState.Dead || currenState == nextState)
+        if (currentState is EnemyState.Dead || currentState == nextState)
         {
             return;
         }
 
-        var previousState = currenState;
-        currenState = nextState;
+        var previousState = currentState;
+        currentState = nextState;
 
-        StateChanged?.Invoke
+        StateChanged?.Invoke(previousState, currentState);
     }
-
 }

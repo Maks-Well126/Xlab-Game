@@ -13,7 +13,7 @@ namespace Players
 
         public float speed => m_speed;
 
-        public Texture2D cursortexture => m_cursorTexture;
+        public Texture2D cursorTexture => m_cursorTexture;
         public float angularSpeed => m_angularSpeed;
     }
 }

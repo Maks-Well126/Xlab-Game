@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2417058976902052636}
   - component: {fileID: 5318538968976580853}
   - component: {fileID: 606615045742074273}
+  - component: {fileID: -6025479929231472373}
+  - component: {fileID: 2632018151476494461}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2071185310959077287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.16547, y: 1, z: 1.39775}
+  m_LocalPosition: {x: 4.16547, y: 0, z: 1.39775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,5 +128,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0edf1715ea365458425503e9150a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  m_enemyData: {fileID: 0}
-  m_health: {fileID: 0}
+  m_attack: {fileID: -6025479929231472373}
+  m_health: {fileID: 2632018151476494461}
+--- !u!114 &-6025479929231472373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071185310959077287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719fa96ac14fc5d48b0ef89029425396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackEnemy
+--- !u!114 &2632018151476494461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071185310959077287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bec326d12771e1419dcb1faca171ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent

@@ -8,13 +8,12 @@ public sealed class AttackEnemy : MonoBehaviour
 
     private float m_attackTime;
     private float m_cooldownTimer;
-    private bool m_initialize;
 
+    private bool m_isInitialized;
 
-
-    private void Initialize(BaseSpellData spell, float attackTime, Transform target)
-    {       
-        if(m_initialize)
+    public void Initialize(BaseSpellData spell, float attackTime, Transform target)
+    {
+        if (m_isInitialized)
         {
             return;
         }
@@ -23,17 +22,18 @@ public sealed class AttackEnemy : MonoBehaviour
         m_target = target;
         m_attackTime = attackTime;
         m_spellCaster = new SpellCaster(transform);
+
+        m_isInitialized = true;
     }
 
     private void Update()
     {
-        if(!m_initialize)
-        { 
+        if (!m_isInitialized)
+        {
             return;
-        
         }
-        
-        if(m_cooldownTimer >0)
+
+        if (m_cooldownTimer > 0)
         {
             m_cooldownTimer -= Time.deltaTime;
         }
@@ -41,18 +41,19 @@ public sealed class AttackEnemy : MonoBehaviour
 
     public bool TryAttack()
     {
-        if (!m_initialize || !m_target)
+        if (!m_isInitialized || !m_target)
         {
             return false;
         }
 
-
-        if(m_cooldownTimer > 0)
+        if (m_cooldownTimer > 0)
         {
             return false;
         }
 
         m_spellCaster.Cast(m_spell, m_target.position);
+        m_cooldownTimer = m_attackTime;
+
         return true;
     }
 }

@@ -1,6 +1,8 @@
 public interface IHealth
 {
-    public void Hael(float heal) { }
+    public float value { get; }
 
-    public void TakeDamage(float damage) { }
+    public void Heal(float heal);
+
+    public void TakeDamage(float damage);
 }

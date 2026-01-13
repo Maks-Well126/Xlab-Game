@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class MouseResolver : MonoBehaviour
+public sealed class MouseResolver : MonoBehaviour
 {
 
     [SerializeField] private LayerMask m_layerMask = ~0;

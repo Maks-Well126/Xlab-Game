@@ -13,7 +13,7 @@ namespace Players
         [SerializeField] private NavMeshAgent m_agent;
 
         private float m_speed;
-        private float m_angularSpeed;
+        private float m_andgularSpeed;
         private bool m_hasDestination;
         
         private void OnValidate()
@@ -25,7 +25,7 @@ namespace Players
         }
 
         private void Awake() =>
-            Initialize(m_speed, m_angularSpeed);
+            Initialize(m_speed, m_andgularSpeed);
         
         private void Update()
         {
@@ -39,7 +39,6 @@ namespace Players
                 if (!m_agent.hasPath || m_agent.velocity.sqrMagnitude <= 0.001f)
                 {
                     m_agent.isStopped = false;
-                    
                     Stopped?.Invoke();
                 }
             }
@@ -48,12 +47,11 @@ namespace Players
         public void Initialize(float speed, float angularSpeed)
         {
             m_speed = speed;
-            m_angularSpeed = angularSpeed;
-
-
+            m_andgularSpeed = angularSpeed;
+            
             m_agent.speed = speed;
             m_agent.angularSpeed = angularSpeed;
-
+            
             m_agent.updateRotation = false;
         }
         
@@ -65,18 +63,18 @@ namespace Players
             DestinationChanged?.Invoke(navMeshPoint);
         }
 
-        public void RotateTowarrds(Vector3 worldPoint)
+        public void RotateTowards(Vector3 worldPoint)
         {
-            var direction = worldPoint - transform.position;
+            var direction =  worldPoint - transform.position;
             direction.y = 0;
 
-            if(direction.sqrMagnitude < 0.0001f)
+            if (direction.sqrMagnitude < 0.0001f)
             {
                 return;
             }
+            
             var targetRotate = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotate, m_agent.angularSpeed * Time.deltaTime);
-
         }
     }
 }

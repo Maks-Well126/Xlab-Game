@@ -2,6 +2,6 @@
     {
         Idle,
         Preparation,
-        Coldown,
+        Cooldown,
         Casting
     }

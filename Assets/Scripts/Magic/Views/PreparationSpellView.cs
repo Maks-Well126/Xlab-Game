@@ -11,9 +11,10 @@ public sealed class PreparationSpellView : MonoBehaviour
     [SerializeField] private MagicConfig m_config;
 
     [SerializeField] private RectTransform m_elementsContainer;
+
     [SerializeField] private Image[] m_icons;
 
-    [Header("Animations")]
+    [Header("Animation")]
     [SerializeField] private float m_shakeIntensity = 20f;
     [SerializeField] private float m_shakeDuration = 1f;
 
@@ -22,30 +23,30 @@ public sealed class PreparationSpellView : MonoBehaviour
 
     private void OnEnable()
     {
-        m_magicSystem.ElementChanged += UpdateIcons;
+        m_magicSystem.ElementsChanged += UpdateIcons;
         m_magicSystem.SpellCancelled += ShakeContainer;
     }
 
     private void OnDisable()
     {
-        m_magicSystem.ElementChanged -= UpdateIcons;
+        m_magicSystem.ElementsChanged -= UpdateIcons;
         m_magicSystem.SpellCancelled -= ShakeContainer;
     }
 
     private void UpdateIcons(IReadOnlyList<ElementType> elements)
     {
-        foreach(var icon in m_icons)
+        foreach (var icon in m_icons)
         {
             icon.sprite = null;
             icon.enabled = false;
         }
 
-        if(elements is null || elements.Count is 0)
+        if (elements is null || elements.Count is 0)
         {
             return;
         }
 
-        for(var i = 0; i < elements.Count; i++)
+        for (var i = 0; i < elements.Count; i++)
         {
             var elementInfo = GetElementInfo(elements[i]);
 
@@ -54,7 +55,7 @@ public sealed class PreparationSpellView : MonoBehaviour
         }
     }
 
-        private void ShakeContainer()
+    private void ShakeContainer()
     {
         m_shakeTween?.Kill();
 
@@ -63,12 +64,9 @@ public sealed class PreparationSpellView : MonoBehaviour
         m_shakeTween = m_elementsContainer
             .DOShakeRotation(m_shakeDuration, m_shakeIntensity)
             .SetEase(Ease.OutQuad)
-            .OnComplete(()=> m_elementsContainer.localRotation = localRotation);
+            .OnComplete(() => m_elementsContainer.localRotation = localRotation);
     }
 
     private ElementData.Item GetElementInfo(ElementType type) =>
         m_config.ElementData.Items.FirstOrDefault(item => item.type == type);
-    
-
-    
 }

@@ -11,9 +11,9 @@ public sealed class MagicConfig : ScriptableObject
     [SerializeField][Min(0)] private float m_cancelCooldown = 0.3f;
 
     public ElementData ElementData => m_elementsData;
-    public SpellDatabase SpellDatabase => m_spellsDateBase;
+    public SpellDatabase SpellsDataBase => m_spellsDateBase;
     public int maxElements => m_maxElements;
 
-    public float cancelColdown => m_cancelCooldown;
+    public float cancelCooldown => m_cancelCooldown;
     
 }
