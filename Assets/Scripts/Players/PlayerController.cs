@@ -8,6 +8,7 @@ namespace Players
     [RequireComponent(typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private
         [SerializeField] private PlayerConfig m_config;
         [SerializeField] private PlayerMovement m_playerMovement;
         [SerializeField] private MouseResolver mMouseResolver;
@@ -32,6 +33,7 @@ namespace Players
         {
             var camera = Camera.main;
             
+            m_health.Initi
             m_playerMovement.Initialize(m_config.speed, m_config.angularSpeed);
             m_playerRotationCalculator = new PlayerRotationCalculator(camera, transform);
             
