@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_attack: {fileID: -6025479929231472373}
   m_health: {fileID: 2632018151476494461}
-  m_movement: {fileID: 0}
+  m_movement: {fileID: 3595788950189663211}
 --- !u!114 &-6025479929231472373
 MonoBehaviour:
   m_ObjectHideFlags: 0

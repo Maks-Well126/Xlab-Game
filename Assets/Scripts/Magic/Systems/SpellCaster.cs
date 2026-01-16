@@ -56,7 +56,7 @@ public sealed class SpellCaster
         }
 
         var effectables = m_casterTransform.GetComponent<IEffectable>();
-       // selfSpell.effects.ApplyEffects(effectables);
+        selfSpell.effects.ApplyEffects(effectables);
     }
 
     private void CastTarget(TargetSpellData targetSpell, Vector3 worldPosition)

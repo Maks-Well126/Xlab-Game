@@ -8,6 +8,7 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private Transform[] m_spawnPoints;
     [SerializeField] private Transform m_playerTransform;
 
+    // TODO Xlab - Remove
     private void Start()
     {
         Spawn();
