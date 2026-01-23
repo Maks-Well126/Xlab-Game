@@ -8,13 +8,17 @@ namespace Players
     [RequireComponent(typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private
         [SerializeField] private PlayerConfig m_config;
+        [SerializeField] private HealthComponent m_health;
         [SerializeField] private PlayerMovement m_playerMovement;
-        [SerializeField] private MouseResolver mMouseResolver;
+        [SerializeField] private MouseResolver m_mouseResolver;
         [SerializeField] private MagicInputHelper m_magicInputHelper;
-
+        
         private PlayerRotationCalculator m_playerRotationCalculator;
+        
+        public PlayerConfig Config => m_config;
+        
+        public HealthComponent Health => m_health;
         
         private void OnValidate()
         {
@@ -22,24 +26,24 @@ namespace Players
             {
                 m_playerMovement = GetComponent<PlayerMovement>();
             }
-            
-            if (!mMouseResolver)
+
+            if (!m_mouseResolver)
             {
-                mMouseResolver = GetComponent<MouseResolver>();
+                m_mouseResolver = GetComponent<MouseResolver>();
             }
         }
 
         private void Start()
         {
-            var camera = Camera.main;
+            var camera =  Camera.main;
             
-            m_health.Initi
+            m_health.Initialize(m_config.hp);
             m_playerMovement.Initialize(m_config.speed, m_config.angularSpeed);
             m_playerRotationCalculator = new PlayerRotationCalculator(camera, transform);
             
             SetupCursor();
         }
-
+      
         private void Update()
         {
             Vector3 mousePosition = Mouse.current.position.ReadValue();
@@ -48,12 +52,10 @@ namespace Players
             
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                Vector3? navPoint = mMouseResolver.GetNavMeshPoint();
-
+                Vector3? navPoint = m_mouseResolver.GetNavMeshPoint();
+                
                 if (navPoint.HasValue)
-                {
                     m_playerMovement.SetDestination(navPoint.Value);
-                }
             }
             
             m_magicInputHelper.Update();

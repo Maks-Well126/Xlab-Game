@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public class BuffEffect : IEffect
 {
     [SerializeReferenceDropdown]
@@ -13,11 +14,11 @@ public class BuffEffect : IEffect
 
     public void Apply(IEffectable effectable)
     {
-        if(effectable is BuffContainer container)
+        if (effectable is BuffContainer conteiner)
         {
-            foreach(var buff in m_buffs)
+            foreach (var buff in m_buffs)
             {
-                container.Add(buff.Clone();
+                conteiner.Add(buff.Clone() as IBuff);
             }
         }
     }

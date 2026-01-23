@@ -8,7 +8,7 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
 
     public void Add(IBuff buff)
     {
-        if(m_buffs.TryGetValue(buff.Id, out IBuff existingBuff))
+        if (m_buffs.TryGetValue(buff.Id, out IBuff existingBuff))
         {
             existingBuff.Refresh(this);
         }
@@ -26,20 +26,20 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
 
     public void Update()
     {
-        foreach(var buff in m_buffs.Values)
+        foreach (var buff in m_buffs.Values)
         {
             buff.Update(Time.deltaTime);
         }
 
-        foreach(var id  in m_ids)
+        foreach (var id in m_ids)
         {
             m_buffs.Remove(id);
         }
-        m_ids.Clear();
 
+        m_ids.Clear();
     }
 }
-        
-        
+
+
 
 

@@ -19,5 +19,5 @@ public class HealthBarView : MonoBehaviour
     }
 
     private void SetValue() =>
-        m_bar.fillAmount = m_healthComponent.value / m_healthComponent.maxValue;
+        m_bar.fillAmount = ((float)m_healthComponent.value) / ((float)m_healthComponent.maxValue);
 }

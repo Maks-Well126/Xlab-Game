@@ -30,6 +30,8 @@ public class HealthComponent : MonoBehaviour, IHealth, IEffectable
         }
     }
 
+    public float maxValue { get; private set; }
+
     public void Initialize(float value)
     {
         if (m_initialized)
@@ -37,7 +39,8 @@ public class HealthComponent : MonoBehaviour, IHealth, IEffectable
             throw new InvalidOperationException("HealthComponent is already initialized");
         }
 
-        m_value = value;
+        maxValue = value;
+        this.value = value;
         m_initialized = true;
     }
 
@@ -52,7 +55,7 @@ public class HealthComponent : MonoBehaviour, IHealth, IEffectable
     public void TakeDamage(float damage)
     {
         if (damage < 0)
-            throw new ArgumentOutOfRangeException(nameof(damage), damage, "Heal cannot be negative");
+            throw new ArgumentOutOfRangeException(nameof(damage), damage, "Damage cannot be negative");
 
         value -= damage;
     }

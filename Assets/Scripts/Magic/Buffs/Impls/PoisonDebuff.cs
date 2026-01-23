@@ -4,17 +4,29 @@ using UnityEngine;
 [Serializable]
 public sealed class PoisonDebuff : TimedBuff
 {
-    [SerializeField][Min(0)] private float m_inteval = 1;
-    [SerializeField][Min(0)] public float m_damagePerSeconds = 2f;
+    [SerializeField][Min(0)] private float m_interval = 1;
+    [SerializeField][Min(0)] private float m_damagedPerSeconds = 2f;
 
     [NonSerialized] private float m_timer;
-
     private IHealth m_health;
+
+    public PoisonDebuff() { }
+
+    public PoisonDebuff(
+        string id,
+        float duration,
+        float interval,
+        float damagedPerSeconds)
+        : base(id, duration)
+    {
+        m_interval = interval;
+        m_damagedPerSeconds = damagedPerSeconds;
+    }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        m_health = container.GetComponent<IHealth>();
+        m_health = conteiner.GetComponent<IHealth>();
     }
 
     protected override void OnDeinitializing()
@@ -24,23 +36,25 @@ public sealed class PoisonDebuff : TimedBuff
         base.OnDeinitializing();
     }
 
-
     protected override void OnUpdated(float deltaTime)
     {
-        if(m_health is null)
+        if (m_health is null)
         {
             Deinitialize();
             return;
         }
 
-        if(m_timer < m_inteval)
+        if (m_timer < m_interval)
         {
             m_timer += deltaTime;
         }
         else
         {
             m_timer = 0;
-            m_health.TakeDamage(m_damagePerSeconds);
+            m_health.TakeDamage(m_damagedPerSeconds);
         }
     }
+
+    public override object Clone() =>
+        new PoisonDebuff(Id, duration, m_interval, m_damagedPerSeconds);
 }

@@ -1,13 +1,13 @@
 ﻿using UnityEngine.UI;
+using System;
 
-public interface IBuff : IClippable
-    {
-        public string Id { get; }
+public interface IBuff : ICloneable
+{
+    public string Id { get; }
 
-        public void Initialize(BuffContainer buffContainer);
+    public void Initialize(BuffContainer conteiner);
 
-        public void Deinitialize();
+    public void Deinitialize();
 
-        public void Update(float deltaTime);
-    }
-
+    public void Update(float deltatime);
+}

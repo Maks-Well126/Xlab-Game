@@ -1,11 +1,8 @@
-﻿
-
-    public static class BuffExtensions
+﻿public static class BuffExtensions
+{
+    public static void Refresh(this IBuff buff, BuffContainer buffConteiner)
     {
-        public static void Refresh(this IBuff buff, BuffContainer buffContainer)
-        {
-            buff.Deinitialize();
-            buff.Initialize(buffContainer);
-        }
+        buff.Deinitialize();
+        buff.Initialize(buffConteiner);
     }
-
+}
