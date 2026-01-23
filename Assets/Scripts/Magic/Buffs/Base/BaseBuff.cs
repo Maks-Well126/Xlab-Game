@@ -36,5 +36,5 @@ public abstract class BaseBuff : IBuff
 
     public virtual void Update(float deltatime) { }
 
-    public abstract object Clone();
+    public abstract IBuff Clone();
 }

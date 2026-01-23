@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class BuffContainer : MonoBehaviour, IEffectable
 {
+    public event Action<IBuff> BuffAdded;
+    public event Action<IBuff> BuffRemoved;
+
     private HashSet<string> m_ids = new();
     private Dictionary<string, IBuff> m_buffs = new();
 
@@ -11,6 +15,7 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
         if (m_buffs.TryGetValue(buff.Id, out IBuff existingBuff))
         {
             existingBuff.Refresh(this);
+            m_ids.Remove(existingBuff.Id);
         }
         else
         {

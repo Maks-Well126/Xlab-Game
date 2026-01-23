@@ -18,7 +18,7 @@ public class BuffEffect : IEffect
         {
             foreach (var buff in m_buffs)
             {
-                conteiner.Add(buff.Clone() as IBuff);
+                conteiner.Add(buff.Clone());
             }
         }
     }
