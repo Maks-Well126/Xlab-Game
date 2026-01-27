@@ -7,18 +7,26 @@ public abstract class BaseBuff : IBuff
     [field: SerializeField]
     public string Id { get; private set; }
 
-    protected BuffContainer conteiner { get; private set; }
+    [field: SerializeField]
+    public Sprite Icon { get; private set; }
+
+    [field: SerializeField]
+    public BuffType Type { get; private set; }
+
+    protected BuffContainer container { get; private set; }
 
     public BaseBuff() { }
 
-    protected BaseBuff(string id)
+    protected BaseBuff(string id, Sprite icon, BuffType type)
     {
         Id = id;
+        Icon = icon;
+        Type = type;
     }
 
-    public void Initialize(BuffContainer conteiner)
+    public void Initialize(BuffContainer container)
     {
-        this.conteiner = conteiner;
+        this.container = container;
         OnInitialized();
     }
 
@@ -28,13 +36,13 @@ public abstract class BaseBuff : IBuff
     {
         OnDeinitializing();
 
-        conteiner.Remove(this);
-        conteiner = null;
+        container.Remove(this);
+        container = null;
     }
 
     protected virtual void OnDeinitializing() { }
 
-    public virtual void Update(float deltatime) { }
+    public virtual void Update(float deltaTime) { }
 
     public abstract IBuff Clone();
 }

@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     {
         m_data = data;
         m_health.Initialize(data.health);
-        m_movement.Initialized(data.speed, playerTransform); 
+        m_movement.Initialize(data.speed, playerTransform); 
         m_attack.Initialize(data.spell, data.attackTime, playerTransform);
 
         m_playerTransform = playerTransform;

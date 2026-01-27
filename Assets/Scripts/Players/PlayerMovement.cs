@@ -54,25 +54,26 @@ namespace Players
             m_agent.angularSpeed = angularSpeed;
             
             m_agent.updateRotation = false;
-
-            SetSpeed();
         }
-
+        
         public void IncreaseAcceleration(float delta)
         {
-            if(delta < 0)
-                throw new ArgumentException("Delta", nameof(delta));
+            if (delta < 0)
+                throw new ArgumentException("Delta cannot be negative", nameof(delta));
+            
             m_acceleration += delta;
+            SetSpeed();
         }
 
         public void DecreaseAcceleration(float delta)
         {
             if (delta < 0)
-                throw new ArgumentException("Delta", nameof(delta));
+                throw new ArgumentException("Delta cannot be negative", nameof(delta));
+            
             m_acceleration -= delta;
+            SetSpeed();
         }
-
-
+        
         public void SetDestination(Vector3 navMeshPoint)
         {
             m_agent.SetDestination(navMeshPoint);
@@ -101,7 +102,7 @@ namespace Players
                 ? m_acceleration
                 : 1;
             
-            m_agent.speed = m_speed * m_acceleration;
+            m_agent.speed = m_speed * acceleration;
         }
     }
 }

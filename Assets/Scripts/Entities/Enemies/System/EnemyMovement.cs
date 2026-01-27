@@ -2,17 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent (typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour, IAcceleration
 {
     [SerializeField] private NavMeshAgent m_agent;
 
-    private Transform m_target;
-    private bool m_isMoving;
-    private bool m_isinitializied;
     private float m_speed;
+    private bool m_isMoving;
+    private Transform m_target;
+    private bool m_isInitialized;
     private float m_acceleration;
-
 
     private void OnValidate()
     {
@@ -20,23 +19,19 @@ public class EnemyMovement : MonoBehaviour, IAcceleration
         {
             m_agent = GetComponent<NavMeshAgent>();
         }
-            
     }
 
-    public void Initialized(float speed, Transform target)
+    public void Initialize(float speed, Transform target)
     {
         m_speed = speed;
         m_target = target;
         m_agent.speed = speed;
-        m_isinitializied = true;
-        SetSpeed();
+        m_isInitialized = true;
     }
-
-
 
     private void Update()
     {
-        if(m_isinitializied || !m_isMoving || !m_target)
+        if (!m_isInitialized || !m_isMoving || !m_target)
         {
             return;
         }
@@ -46,7 +41,7 @@ public class EnemyMovement : MonoBehaviour, IAcceleration
 
     public void StartMoving()
     {
-        if(!m_isinitializied)
+        if (!m_isInitialized)
         {
             return;
         }
@@ -57,7 +52,7 @@ public class EnemyMovement : MonoBehaviour, IAcceleration
 
     public void StopMoving()
     {
-        if(m_isinitializied)
+        if (!m_isInitialized)
         {
             return;
         }
@@ -70,24 +65,27 @@ public class EnemyMovement : MonoBehaviour, IAcceleration
     public void IncreaseAcceleration(float delta)
     {
         if (delta < 0)
-            throw new ArgumentException("Delta", nameof(delta));
+            throw new ArgumentException("Delta cannot be negative", nameof(delta));
+
         m_acceleration += delta;
+        SetSpeed();
     }
 
     public void DecreaseAcceleration(float delta)
     {
         if (delta < 0)
-            throw new ArgumentException("Delta", nameof(delta));
+            throw new ArgumentException("Delta cannot be negative", nameof(delta));
+
         m_acceleration -= delta;
+        SetSpeed();
     }
+
     private void SetSpeed()
     {
         var acceleration = m_acceleration > 0
             ? m_acceleration
             : 1;
 
-        m_agent.speed = m_speed * m_acceleration;
+        m_agent.speed = m_speed * acceleration;
     }
-
-
 }

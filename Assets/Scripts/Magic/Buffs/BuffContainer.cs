@@ -10,6 +10,8 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
     private HashSet<string> m_ids = new();
     private Dictionary<string, IBuff> m_buffs = new();
 
+    public IReadOnlyCollection<IBuff> Buffs => m_buffs.Values;
+
     public void Add(IBuff buff)
     {
         if (m_buffs.TryGetValue(buff.Id, out IBuff existingBuff))
@@ -21,6 +23,8 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
         {
             m_buffs.Add(buff.Id, buff);
             buff.Initialize(this);
+
+            BuffAdded?.Invoke(buff);
         }
     }
 
@@ -38,13 +42,15 @@ public sealed class BuffContainer : MonoBehaviour, IEffectable
 
         foreach (var id in m_ids)
         {
+            var buff = m_buffs[id];
+
             m_buffs.Remove(id);
+            BuffRemoved?.Invoke(buff);
         }
 
         m_ids.Clear();
     }
 }
-
 
 
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BuffElementView : MonoBehaviour
@@ -15,27 +10,25 @@ public class BuffElementView : MonoBehaviour
 
     public void Initialize(IBuff buff)
     {
-
         m_buff = buff;
         gameObject.SetActive(true);
+        m_timerImage.fillAmount = 1;
         m_iconImage.sprite = buff.Icon;
-
     }
 
-    public void DeInitialize()
+    public void Deinitialize()
     {
         m_buff = null;
+        m_timerImage.fillAmount = 0;
         gameObject.SetActive(false);
-
     }
 
-    private void Update()
+    public void Update()
     {
-        if (m_buff is ITimeBuff timeBuff)
+        if (m_buff is ITimedBuff timedBuff)
         {
-          //  m_timerImage.fillAmount = timeBuff.timer / timeBuff123;
+            m_timerImage.fillAmount = timedBuff.timer / timedBuff.duration;
         }
-        
     }
 }
 

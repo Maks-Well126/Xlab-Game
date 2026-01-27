@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
+[Serializable]
 public class AccelerationBuff : TimedBuff
 {
     [SerializeField] private float m_value;
+
     private IAcceleration m_acceleration;
 
     public AccelerationBuff(
         string id,
+        Sprite icon,
+        BuffType type,
         float duration,
         float value)
-        : base(id, duration)
+        : base(id, icon, type, duration)
     {
         m_value = value;
     }
@@ -23,12 +27,11 @@ public class AccelerationBuff : TimedBuff
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        m_acceleration = container.GetComponent<IAcceleration>();
 
-        m_acceleration = conteiner.GetComponent<IAcceleration>();
-
-        if(m_acceleration is null )
+        if (m_acceleration is null)
         {
-           // OnDeInitialized();
+            Deinitialize();
         }
         else
         {
@@ -36,17 +39,13 @@ public class AccelerationBuff : TimedBuff
         }
     }
 
-    protected override void OnDeInitialized()
+    protected override void OnDeinitializing()
     {
-        m_acceleration?
-
-
+        m_acceleration?.DecreaseAcceleration(m_value);
+        base.OnDeinitializing();
     }
 
-
-    public override IBuff Clone()
-    {
-        throw new NotImplementedException();
-    }
+    public override IBuff Clone() =>
+        new AccelerationBuff(Id, Icon, Type, duration, m_value);
 }
 

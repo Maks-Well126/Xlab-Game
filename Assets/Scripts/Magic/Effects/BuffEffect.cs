@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -14,11 +9,11 @@ public class BuffEffect : IEffect
 
     public void Apply(IEffectable effectable)
     {
-        if (effectable is BuffContainer conteiner)
+        if (effectable is BuffContainer container)
         {
             foreach (var buff in m_buffs)
             {
-                conteiner.Add(buff.Clone());
+                container.Add(buff.Clone());
             }
         }
     }
