@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Enemydata", menuName = "Xlab/Enemies/Enemy")]
@@ -10,7 +12,7 @@ public class EnemyData : ScriptableObject
     [SerializeField][Range(0f, 100f)] private float m_speed;
 
     [Header("Attack")]
-    [SerializeField] private BaseSpellData m_spell;
+    [SerializeField] private SpellEnemyData[] m_spells;
     [SerializeField][Min(0)] private float m_attackTime;
     [SerializeField][Min(0)] private float m_attackRange;
 
@@ -18,7 +20,7 @@ public class EnemyData : ScriptableObject
 
     public float speed => m_speed;
 
-    public BaseSpellData spell => m_spell;
+    public IReadOnlyList<SpellEnemyData> spells => m_spells;
 
     public float attackTime => m_attackTime;
 
@@ -26,3 +28,11 @@ public class EnemyData : ScriptableObject
 
     public AttackEnemyType enemyType => m_enemyType;
 }
+
+[Serializable]
+public struct SpellEnemyData
+{
+    [SerializeField] public int count;
+    [SerializeField] public BaseSpellData spell;
+}
+

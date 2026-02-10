@@ -1,27 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public sealed class AttackEnemy : MonoBehaviour
 {
     private Transform m_target;
-    private BaseSpellData m_spell;
+    private IReadOnlyList<SpellEnemyData> m_spells;
     private SpellCaster m_spellCaster;
 
     private float m_attackTime;
     private float m_cooldownTimer;
-
     private bool m_isInitialized;
+    private int m_count;
+    private int m_maxCount;
 
-    public void Initialize(BaseSpellData spell, float attackTime, Transform target)
+    public void Initialize(IReadOnlyList<SpellEnemyData> spells, float attackTime, Transform target)
     {
         if (m_isInitialized)
         {
             return;
         }
 
-        m_spell = spell;
+        m_spells = spells.OrderBy(spell => spell.count).ToArray();
+
         m_target = target;
         m_attackTime = attackTime;
         m_spellCaster = new SpellCaster(transform, true);
+
+        m_maxCount = spells[^1].count;
 
         m_isInitialized = true;
     }
@@ -51,7 +57,22 @@ public sealed class AttackEnemy : MonoBehaviour
             return false;
         }
 
-        m_spellCaster.Cast(m_spell, m_target.position);
+        m_count++;
+        var spell = m_spells.FirstOrDefault(spell => spell.count == m_count);
+
+        if (spell.spell is null)
+        {
+            m_spellCaster.Cast(m_spells[0].spell, m_target.position);
+        }
+        else
+        {
+            m_spellCaster.Cast(spell.spell, m_target.position);
+        }
+
+        if(m_count == m_maxCount)
+            m_count = 0;
+
+
         m_cooldownTimer = m_attackTime;
 
         return true;
