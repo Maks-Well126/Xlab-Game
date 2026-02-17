@@ -222,7 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
   m_enemySpawner: {fileID: 903185458}
-  m_mainMenu: {fileID: 1180195630}
+  m_mainMenuView: {fileID: 0}
+  m_playerController: {fileID: 0}
 --- !u!1 &207326148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,8 +2114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6c5152cd77d8f4e92d6354e253b440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuView
-  m_playButton: {fileID: 0}
-  m_exitButton: {fileID: 0}
+  m_playButton: {fileID: 1374360504}
+  m_exitButton: {fileID: 896302493}
 --- !u!114 &1180195631
 MonoBehaviour:
   m_ObjectHideFlags: 0
