@@ -48,13 +48,13 @@ public class Enemy : MonoBehaviour
     {
         m_data = data;
         m_health.Initialize(data.health);
-        m_movement.Initialize(data.speed, playerTransform); 
-        m_attack.Initialize(data.spell, data.attackTime, playerTransform);
+        m_movement.Initialize(data.speed, playerTransform);
+        m_attack.Initialize(data.spells, data.attackTime, playerTransform);
 
         m_playerTransform = playerTransform;
         m_stateMachine ??= new EnemyStateMachine();
 
-        if(data.enemyType == AttackEnemyType.Melee)
+        if (data.enemyType == AttackEnemyType.Melee)
         {
             m_stateMachine.ChangeState(EnemyState.Move);
         }
@@ -122,13 +122,13 @@ public class Enemy : MonoBehaviour
 
     private void OnStateChanged(EnemyState previousState, EnemyState nextState)
     {
-        if(previousState is EnemyState.Move)
+        if (previousState is EnemyState.Move)
         {
             m_movement.StopMoving();
 
         }
 
-        if(nextState is EnemyState.Move)
+        if (nextState is EnemyState.Move)
         {
             m_movement.StartMoving();
         }

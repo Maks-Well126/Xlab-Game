@@ -13,6 +13,7 @@ public sealed class AttackEnemy : MonoBehaviour
     private bool m_isInitialized;
     private int m_count;
     private int m_maxCount;
+    private BaseSpellData m_defaultSpell;
 
     public void Initialize(IReadOnlyList<SpellEnemyData> spells, float attackTime, Transform target)
     {
@@ -23,6 +24,7 @@ public sealed class AttackEnemy : MonoBehaviour
 
         m_spells = spells.OrderBy(spell => spell.count).ToArray();
 
+        //m_defaultSpell = defaultSpell;
         m_target = target;
         m_attackTime = attackTime;
         m_spellCaster = new SpellCaster(transform, true);

@@ -12,6 +12,7 @@ public class EnemyData : ScriptableObject
     [SerializeField][Range(0f, 100f)] private float m_speed;
 
     [Header("Attack")]
+    [SerializeField] private BaseSpellData m_defaultSpell;
     [SerializeField] private SpellEnemyData[] m_spells;
     [SerializeField][Min(0)] private float m_attackTime;
     [SerializeField][Min(0)] private float m_attackRange;
@@ -25,6 +26,8 @@ public class EnemyData : ScriptableObject
     public float attackTime => m_attackTime;
 
     public float attackRange => m_attackRange;
+    
+    public BaseSpellData defaultSpell => m_defaultSpell;
 
     public AttackEnemyType enemyType => m_enemyType;
 }
