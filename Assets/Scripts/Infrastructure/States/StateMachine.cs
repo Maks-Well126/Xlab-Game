@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 public class StateMachine
 {
@@ -59,6 +60,7 @@ public class PauseMenuState : IState
 
 public class GameplayState : IState
 {
+    private readonly Vector3 m_playrPosition;
     private readonly StateMachine m_stateMachine;
     private readonly SpawnerEnemy m_spawnerEnemy;
     public GameplayState(
@@ -68,7 +70,10 @@ public class GameplayState : IState
         m_spawnerEnemy = spawnerEnemy;
         m_stateMachine = stateMachine;
     }
-    public void Enter() { }
+    public void Enter() 
+    {
+
+    }
     public void Exit() { }
 }
 

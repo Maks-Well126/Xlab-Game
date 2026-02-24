@@ -25,7 +25,7 @@ namespace Players
             }
         }
 
-        private void Awake() =>
+        private void Awake() => 
             Initialize(m_speed, m_andgularSpeed);
         
         private void Update()

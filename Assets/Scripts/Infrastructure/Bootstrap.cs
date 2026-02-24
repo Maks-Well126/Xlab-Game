@@ -1,22 +1,30 @@
-using Players;
-using UnityEngine;
+//using Players;
+//using UnityEngine;
 
-public class Bootstrap : MonoBehaviour
-{
-    [SerializeField] private SpawnerEnemy m_enemySpawner;
-    [SerializeField] private MainMenuView m_mainMenuView;
-    [SerializeField] private PlayerController m_playerController;
-    private void Awake()
-    {
-        //var stateMachine = new StateMachine();
+//public class Bootstrap : MonoBehaviour, IState
+//{
+//    [SerializeField] private MouseResolver m_mouseResolver;
 
-        //stateMachine.Initialize(
-        //    new MainMenuState(stateMachine, m_mainMenuView),
-        //    new PauseMenuState(stateMachine),
-        //    new DeadState(stateMachine),
-        //    new GameplayState(stateMachine, m_enemySpawner));
+//    private StateMachine m_statemachine;
 
-      //  StateMachine.ChangedState;
-    }
+//    public void Initialize(StateMachine stateMachine)
+//    {
+//        m_statemachine = stateMachine;
+//    }
 
-}
+//    public void Enter()
+//    {
+//        ServiceLocator.Register(m_mouseResolver);
+
+//        var playerFactory = new PlayerFactory("Prefabs/player");
+
+//        ServiceLocator.Register<PlayerFactory>(playerFactory);
+//        ServiceLocator.Register<IPlayerFactorySettings>(playerFactory);
+
+
+//        m_statemachine.ChangedState<GameplayState>();
+//    }
+
+//    public void Exit() { }
+
+//}
