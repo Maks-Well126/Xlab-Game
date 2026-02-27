@@ -1,18 +1,24 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
+using UnityEngine;
 
 public class StateMachine
 {
     private IState m_state;
     private Dictionary<Type, IState> m_states = new();
+
     public void Initialize(params IState[] states)
     {
         if (m_states.Count > 0) return;
-        
+
+        foreach (var state in states)
+        {
+            m_states.Add(state.GetType(), state);
+        }
     }
+
     public void ChangedState<T>()
-        where T: IState
+        where T : IState
     {
         m_state?.Exit();
         {
@@ -25,6 +31,7 @@ public class StateMachine
 public interface IState
 {
     public void Enter();
+
     public void Exit();
 }
 
@@ -46,41 +53,76 @@ public class MainMenuState : IState
     public void Enter()
     {
         m_mainMenuView.gameObject.SetActive(true);
-       // m_mainMenuView.PlayClicked += OnPlayClick();
-
+        m_mainMenuView.PlayClicked += OnPlayClicked;
+        m_mainMenuView.ExitClicked += OnExitClicked;
     }
-    public void Exit() { }
-    
+
+    public void Exit()
+    {
+        m_mainMenuView.PlayClicked -= OnPlayClicked;
+        m_mainMenuView.ExitClicked -= OnExitClicked;
+        m_mainMenuView.gameObject.SetActive(false);
+    }
+
+    private void OnPlayClicked() =>
+        m_stateMachine.ChangedState<GameplayState>();
+
+    private void OnExitClicked()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+#endif
+        Application.Quit();
+    }
 }
+
 public class PauseMenuState : IState
 {
-    public void Enter() { }
-    public void Exit() { }
+    private readonly StateMachine m_stateMachine;
+
+    public PauseMenuState(StateMachine stateMachine)
+    {
+        m_stateMachine = stateMachine;
+    }
+
+    public void Enter() => throw new NotImplementedException();
+
+    public void Exit() => throw new NotImplementedException();
 }
 
 public class GameplayState : IState
 {
-    private readonly Vector3 m_playrPosition;
     private readonly StateMachine m_stateMachine;
     private readonly SpawnerEnemy m_spawnerEnemy;
+
     public GameplayState(
         StateMachine stateMachine,
         SpawnerEnemy spawnerEnemy)
-    {   
+    {
         m_spawnerEnemy = spawnerEnemy;
         m_stateMachine = stateMachine;
     }
-    public void Enter() 
-    {
 
+    public void Enter()
+    {
+        m_spawnerEnemy.Spawn();
     }
-    public void Exit() { }
+
+    public void Exit() => throw new NotImplementedException();
 }
 
 public class DeadState : IState
 {
-    public void Enter() { }
-    public void Exit() { }
+    private readonly StateMachine m_stateMachine;
+
+    public DeadState(StateMachine stateMachine)
+    {
+        m_stateMachine = stateMachine;
+    }
+
+    public void Enter() => throw new NotImplementedException();
+
+    public void Exit() => throw new NotImplementedException();
 }
 
 

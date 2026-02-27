@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Enemydata", menuName = "Xlab/Enemies/Enemy")]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "XLab/Enemies/Enemy")]
 public class EnemyData : ScriptableObject
 {
     [SerializeField] private AttackEnemyType m_enemyType;
@@ -21,20 +21,21 @@ public class EnemyData : ScriptableObject
 
     public float speed => m_speed;
 
-    public IReadOnlyList<SpellEnemyData> spells => m_spells;
-
     public float attackTime => m_attackTime;
 
     public float attackRange => m_attackRange;
-    
-    public BaseSpellData defaultSpell => m_defaultSpell;
 
     public AttackEnemyType enemyType => m_enemyType;
+
+    public BaseSpellData defaultSpell => m_defaultSpell;
+
+    public IReadOnlyList<SpellEnemyData> spells => m_spells;
 }
 
 [Serializable]
 public struct SpellEnemyData
 {
+    // TODO Сделать нормально
     [SerializeField] public int count;
     [SerializeField] public BaseSpellData spell;
 }

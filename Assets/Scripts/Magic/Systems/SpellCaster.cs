@@ -7,17 +7,14 @@ using Object = UnityEngine.Object;
 
 public sealed class SpellCaster
 {
-    private readonly Transform m_casterTransform;
     private readonly bool m_isSingleSpell;
+    private readonly Transform m_casterTransform;
     private ObjectPool<GameObject> m_visualEffectPool;
 
     public SpellCaster(Transform casterTransform, bool isSingleSpell = false)
-
     {
         m_isSingleSpell = isSingleSpell;
         m_casterTransform = casterTransform;
-        
-       
     }
 
     public void Cast(BaseSpellData spell, Vector3 worldPosition)
@@ -55,7 +52,7 @@ public sealed class SpellCaster
             SetLayer(visualEffect);
         }
 
-        var effectables = m_casterTransform.GetComponent<IEffectable>();
+        var effectables = m_casterTransform.GetComponents<IEffectable>();
         selfSpell.effects.ApplyEffects(effectables);
     }
 
@@ -78,21 +75,29 @@ public sealed class SpellCaster
 
     private void CastNonTarget(NonTargetSpellData nonTargetSpell)
     {
-        
+        // Разберем на уроке. 
     }
 
     private void CastAoe(AoeSpellData aoeSpell, Vector3 worldPosition)
     {
-        if (!m_isSingleSpell)
+        GameObject aoe;
+
+        if (m_isSingleSpell)
         {
-            m_visualEffectPool ??= new ObjectPool<GameObject>(createFunc: () => new GameObject("Visual"));
+            m_visualEffectPool ??= new ObjectPool<GameObject>(
+                createFunc: Create,
+                actionOnGet: gm => gm.SetActive(true),
+                actionOnRelease: gm => gm.SetActive(false),
+                actionOnDestroy: Object.Destroy);
+
+            aoe = m_visualEffectPool.Get();
+        }
+        else
+        {
+            aoe = Create();
         }
 
-        var aoe = aoeSpell.visualEffect
-            ? Object.Instantiate(aoeSpell.visualEffect, m_casterTransform.position, Quaternion.identity)
-            : new GameObject();
         SetLayer(aoe);
-
         aoe.transform.position = worldPosition;
 
         var spellAoe =
@@ -100,6 +105,23 @@ public sealed class SpellCaster
             aoe.AddComponent<SpellAoe>();
 
         spellAoe.Initialize(worldPosition, aoeSpell.radius, aoeSpell.effects);
+
+        if (m_isSingleSpell)
+        {
+            m_visualEffectPool.Release(aoe);
+        }
+        else
+        {
+            Object.Destroy(aoe, t: 1);
+        }
+        return;
+
+        GameObject Create()
+        {
+            return aoeSpell.visualEffect
+                ? Object.Instantiate(aoeSpell.visualEffect, m_casterTransform.position, Quaternion.identity)
+                : new GameObject();
+        }
     }
 
     private void SetLayer(GameObject visualEffect) =>
