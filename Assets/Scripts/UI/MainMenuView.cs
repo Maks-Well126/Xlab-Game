@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 public class MainMenuView : MonoBehaviour
 {
-    public event Action PlayClicked;
-    public event Action ExitClicked;
 
+    [SerializeField] private Loading m_loading;
     [SerializeField] private Button m_playButton;
     [SerializeField] private Button m_exitButton;
 
