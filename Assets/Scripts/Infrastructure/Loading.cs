@@ -8,7 +8,7 @@ public class Loading : MonoBehaviour
     [SerializeField] private Image m_loading;
     public void LoadScene(string nameScene)
     {
-        
+        gameObject.SetActive(true);
         StartCoroutine(LoadSceneAsync(nameScene));
     }
 
