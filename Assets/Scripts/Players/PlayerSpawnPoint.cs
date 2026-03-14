@@ -1,7 +1,3 @@
-﻿
-public class PlayerSpawnPoint
-{
-
-}
-
+﻿using UnityEngine;
+public sealed class PlayerSpawnPoint : MonoBehaviour { }
 

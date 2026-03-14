@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class DeadMenuView : MonoBehaviour
 {
     public event Action GoToMenuClicked;
 
-   [SerializeField] private Button m_goToMainMenuButton;
+    [SerializeField] private Button m_goToMainMenuButton;
 
     private void OnEnable()
     {
@@ -15,7 +14,7 @@ public class DeadMenuView : MonoBehaviour
 
     private void OnDisable()
     {
-     //   m_goToMainMenuButton.onClick.AddListener(OnClicked);
+        m_goToMainMenuButton.onClick.RemoveListener(OnClicked);
     }
 
     private void OnClicked() =>

@@ -19,8 +19,6 @@ namespace Cameras
 
             var targetPosition = m_target.position + m_offset;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref m_velocity, m_smootTime);
-
-
         }
 
         public void SetTarget(Transform target) =>  
