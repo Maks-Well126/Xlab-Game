@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
-
 
 namespace Players
 {
@@ -11,11 +9,12 @@ namespace Players
         [SerializeField] private PlayerConfig m_config;
         [SerializeField] private HealthComponent m_health;
         [SerializeField] private PlayerMovement m_playerMovement;
-        [SerializeField] private MouseResolver m_mouseResolver;
+        
         [SerializeField] private MagicInputHelper m_magicInputHelper;
-        
+
+        private MouseResolver m_mouseResolver;
         private PlayerRotationCalculator m_playerRotationCalculator;
-        
+
         public PlayerConfig Config => m_config;
         
         public HealthComponent Health => m_health;
@@ -26,24 +25,21 @@ namespace Players
             {
                 m_playerMovement = GetComponent<PlayerMovement>();
             }
-
-            if (!m_mouseResolver)
-            {
-                m_mouseResolver = GetComponent<MouseResolver>();
-            }
         }
 
-        private void Start()
+        public void Initialize(
+            Camera camera, 
+            MouseResolver mouseResolver)
         {
-            var camera =  Camera.main;
+            m_mouseResolver = mouseResolver;
             
-            m_health.Initialize(m_config.hp);
+            m_health.Initialize(m_config.Hp);
             m_playerMovement.Initialize(m_config.speed, m_config.angularSpeed);
             m_playerRotationCalculator = new PlayerRotationCalculator(camera, transform);
             
             SetupCursor();
         }
-      
+
         private void Update()
         {
             Vector3 mousePosition = Mouse.current.position.ReadValue();
@@ -53,9 +49,11 @@ namespace Players
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
                 Vector3? navPoint = m_mouseResolver.GetNavMeshPoint();
-                
+
                 if (navPoint.HasValue)
+                {
                     m_playerMovement.SetDestination(navPoint.Value);
+                }
             }
             
             m_magicInputHelper.Update();

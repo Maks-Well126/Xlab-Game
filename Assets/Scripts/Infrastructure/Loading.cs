@@ -3,9 +3,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Loading : MonoBehaviour
+public sealed class Loading : MonoBehaviour
 {
     [SerializeField] private Image m_loading;
+
+    private string _nameScene;
+    private static Loading m_instance;
+
+    private void Awake()
+    {
+        if (m_instance is not null)
+        {
+            Destroy(m_instance.gameObject);
+            m_instance = null;
+        }
+
+        m_instance = this;
+        gameObject.SetActive(false);
+        DontDestroyOnLoad(target: this);
+    }
+
     public void LoadScene(string nameScene)
     {
         gameObject.SetActive(true);
@@ -14,24 +31,23 @@ public class Loading : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string nameScene)
     {
-        gameObject.SetActive(true);
         m_loading.fillAmount = 0;
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(nameScene);
-        yield return operation;
-
-        m_loading.fillAmount = 0.5f;
-
         const int steps = 10;
-        var delta = 1 -m_loading.fillAmount;
+        const float maxProgress = 0.5f;
 
-        for(var i = 0; i < steps; i++)
+        for (var i = 0; i < steps; i++)
         {
-            yield return new WaitForSeconds(0.5f);
-            m_loading.fillAmount += (delta / steps);
+            yield return new WaitForSecondsRealtime(0.5f);
+            m_loading.fillAmount += maxProgress / steps;
         }
 
+        var operation = SceneManager.LoadSceneAsync(nameScene);
+
+        yield return operation;
+        yield return new WaitForEndOfFrame();
+
+        m_loading.fillAmount = 1f;
         gameObject.SetActive(false);
     }
-
 }

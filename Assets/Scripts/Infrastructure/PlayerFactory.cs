@@ -6,6 +6,7 @@ public interface IPlayerFactorySettings
 {
     public Vector3 position { get; set; }
 }
+
 public interface IPlayerFactory
 {
     public PlayerController Create();
@@ -28,19 +29,21 @@ public class PlayerFactory : IPlayerFactory, IPlayerFactorySettings
 
     public PlayerController Create()
     {
-        if(m_playerInstance is not null)
+        if (m_playerInstance is not null)
         {
             return m_playerInstance;
         }
-        if(m_playerPrefab is null)
+
+        if (m_playerPrefab is null)
         {
             var playerPrefab = Resources.Load<GameObject>(m_path);
             m_playerPrefab = playerPrefab.GetComponent<PlayerController>();
         }
 
         m_playerInstance = Object.Instantiate(m_playerPrefab, ((IPlayerFactorySettings)this).position, Quaternion.identity);
-        return m_playerInstance;
+        m_playerInstance.Initialize(Camera.main, ServiceLocator.Resolve<MouseResolver>());
 
+        return m_playerInstance;
     }
 
     public void Release()

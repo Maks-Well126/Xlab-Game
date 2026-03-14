@@ -15,7 +15,7 @@ namespace Players
         
         public float speed => m_speed;
         
-        public int hp => m_hp;
+        public int Hp => m_hp;
         
         public float angularSpeed => m_angularSpeed;
         
