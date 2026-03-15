@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 27b7908c19bec9e438f74b820a572d49, type: 2}
+  - {fileID: 2100000, guid: a5fae7727b7b7824596fa8f232aac237, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2071185310959077287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0edf1715ea365458425503e9150a63, type: 3}
+  m_Script: {fileID: 11500000, guid: 33294357fc18a7e4dac8140960e824f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_attack: {fileID: -6025479929231472373}

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2172949426792778288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef71b887043d4a159af78bc9240844ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e4c59f676e0e724b830ba65ea310945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Views.HealthBarView
   m_bar: {fileID: 1557916901520417586}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1731197318742856060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3629624611363486486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01845eb50206475e9e8291d59c1d847a, type: 3}
+  m_Script: {fileID: 11500000, guid: 596697ae6f1566f47b904e5bfad22529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utils.FixedRotation
 --- !u!1 &3686267519103144282
