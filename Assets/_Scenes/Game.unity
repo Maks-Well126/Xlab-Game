@@ -222,18 +222,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026422565}
     m_Modifications:
-    - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_text
-      value: W
-      objectReference: {fileID: 0}
-    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a0856e8b8afd342dc9dc937bb354f6ae, type: 3}
-    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Name
-      value: Element Binding (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1266804013603508630, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -317,6 +305,14 @@ PrefabInstance:
     - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_text
       value: W
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0856e8b8afd342dc9dc937bb354f6ae, type: 3}
+    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Name
+      value: Element Binding (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8079924896954474365, guid: 0a3bf830559464244b6d3bdd8078d7bf, type: 3}
       propertyPath: m_Sprite
@@ -1311,18 +1307,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026422565}
     m_Modifications:
-    - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_text
-      value: E
-      objectReference: {fileID: 0}
-    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b5f132f254ade4e4c84bf99091ca6753, type: 3}
-    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Name
-      value: Element Binding (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1266804013603508630, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1406,6 +1390,14 @@ PrefabInstance:
     - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_text
       value: E
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b5f132f254ade4e4c84bf99091ca6753, type: 3}
+    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Name
+      value: Element Binding (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8079924896954474365, guid: 0a3bf830559464244b6d3bdd8078d7bf, type: 3}
       propertyPath: m_Sprite
@@ -2108,10 +2100,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026422565}
     m_Modifications:
-    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Name
-      value: Element Binding
-      objectReference: {fileID: 0}
     - target: {fileID: 1266804013603508630, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2191,6 +2179,10 @@ PrefabInstance:
     - target: {fileID: 1266804013603508630, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Name
+      value: Element Binding
       objectReference: {fileID: 0}
     - target: {fileID: 8307394772795835603, guid: 0a3bf830559464244b6d3bdd8078d7bf, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -2710,18 +2702,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026422565}
     m_Modifications:
-    - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_text
-      value: R
-      objectReference: {fileID: 0}
-    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: bf7264747dd844e628d3bb56530d345d, type: 3}
-    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
-      propertyPath: m_Name
-      value: Element Binding (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 1266804013603508630, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2805,6 +2785,14 @@ PrefabInstance:
     - target: {fileID: 3520160416951470813, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
       propertyPath: m_text
       value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517510203565848233, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bf7264747dd844e628d3bb56530d345d, type: 3}
+    - target: {fileID: 6214653907609349510, guid: 6399931e23b3190468837ab61512f6a6, type: 3}
+      propertyPath: m_Name
+      value: Element Binding (3)
       objectReference: {fileID: 0}
     - target: {fileID: 8079924896954474365, guid: 0a3bf830559464244b6d3bdd8078d7bf, type: 3}
       propertyPath: m_Sprite

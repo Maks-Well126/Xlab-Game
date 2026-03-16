@@ -5,25 +5,35 @@ using UnityEngine.UI;
 public class MainMenuView : MonoBehaviour
 {
     [SerializeField] private Button m_playButton;
+    [SerializeField] private Button m_settingsButton;
     [SerializeField] private Button m_exitButton;
+    [SerializeField] private SettingsWiew m_settingsView;
 
     private Loading m_loading;
 
     private void Start()
     {
         m_loading = ServiceLocator.Resolve<Loading>();
+        m_settingsView.Closed += OnSettingsClosed;
     }
 
     private void OnEnable()
     {
         m_playButton.onClick.AddListener(OnPlayClick);
+        m_settingsButton.onClick.AddListener(OnSettingsClick);
         m_exitButton.onClick.AddListener(OnExitClick);
+
     }
 
     private void OnDisable()
     {
         m_playButton.onClick.RemoveListener(OnPlayClick);
+        m_settingsButton.onClick.RemoveListener(OnSettingsClick);
         m_exitButton.onClick.RemoveListener(OnExitClick);
+    }
+    private void OnDestroy()
+    {
+        m_settingsView.Closed -= OnSettingsClosed;
     }
 
     private void OnPlayClick()
@@ -31,7 +41,14 @@ public class MainMenuView : MonoBehaviour
         gameObject.SetActive(false);
         m_loading.LoadScene(GlobalConstants.Scenes.Game);
     }
+    private void OnSettingsClick()
+    {
+        gameObject.SetActive(false);
+        m_settingsView.gameObject.SetActive(true);
+    }
 
+    private void OnSettingsClosed() =>
+        gameObject.SetActive(true);
     private void OnExitClick()
     {
 #if UNITY_EDITOR
