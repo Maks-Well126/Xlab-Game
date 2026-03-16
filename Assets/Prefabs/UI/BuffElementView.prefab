@@ -237,7 +237,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6965147260946331624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e1a6f8c8b4447e86721987a504a4f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b6b88ade03aac34480263f4d10c0c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Magic.Views.BuffElementView
   m_iconImage: {fileID: 5845293584614177334}
