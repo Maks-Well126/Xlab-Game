@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3108a686637daf24e80a625ba375b40d, type: 3}
-  m_Name: FireballEnemuSpell
+  m_Name: FireBallEnemuSpell
   m_EditorClassIdentifier: Assembly-CSharp::Magic.Spells.Data.TargetSpellData
   m_spellName: Fireball Enemy
   m_visualEffect: {fileID: 1470432211585010, guid: 0fe581e12f69a8c48a76721f16c371fb, type: 3}
